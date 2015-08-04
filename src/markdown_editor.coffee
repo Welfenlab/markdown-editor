@@ -31,16 +31,13 @@ module.exports =
     editor.setValue(value);
     editor.gotoLine(0);
 
-
-    #editor.renderer.setShowGutter false
     editor.setOptions {
       fontSize: "15pt"
       enableBasicAutocompletion: true
       enableLiveAutocompletion: true
     }
 
-    editor.addResult = (results) ->
-      ed = editor
+    editor.addResult = (ed, results) ->
       annos = ed.getSession().getAnnotations()
       for result in results
         annos.push
@@ -55,15 +52,14 @@ module.exports =
         rng = new Range.Range result.lineNumber, result.column-1,
             result.lineNumber, result.column + result.length - 1
         m_id = ed.getSession().addMarker rng, result.type, "background"
-        ed.__ko_ace_markers__.push m_id
+        ed.__ace_markers__.push m_id
 
-    editor.clearResults = ->
-      ed = editor
+    editor.clearResults = (ed) ->
       if not ed? then return
       ed.getSession().clearAnnotations()
       markers = ed.__ko_ace_markers__ || []
       _.each markers, (mid) -> ed.getSession().removeMarker mid
-      ed.__ko_ace_markers__ = []
+      ed.__ace_markers__ = []
 
     editor.getSession().on "change", (delta)->
       options.plugins?.forEach (p) ->
