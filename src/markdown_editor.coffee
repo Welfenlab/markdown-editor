@@ -7,6 +7,30 @@ require 'brace/ext/language_tools'
 _ = require 'lodash'
 
 module.exports =
+  addResult: (ed, results) ->
+    annos = ed.getSession().getAnnotations()
+    for result in results
+      annos.push
+        row: result.lineNumber
+        column: result.column
+        text: result.description
+        type: result.type
+
+    ed.getSession().setAnnotations annos
+
+    for result in results
+      rng = new Range.Range result.lineNumber, result.column-1,
+          result.lineNumber, result.column + result.length - 1
+      m_id = ed.getSession().addMarker rng, result.type, "background"
+      ed.__ace_markers__.push m_id
+
+  clearResults: (ed) ->
+    if not ed? then return
+    ed.getSession().clearAnnotations()
+    markers = ed.__ko_ace_markers__ || []
+    _.each markers, (mid) -> ed.getSession().removeMarker mid
+    ed.__ace_markers__ = []
+
   create: (element_id, value, options) ->
     value = value || ""
     options = options || {}
@@ -37,29 +61,8 @@ module.exports =
       enableLiveAutocompletion: true
     }
 
-    editor.addResult = (ed, results) ->
-      annos = ed.getSession().getAnnotations()
-      for result in results
-        annos.push
-          row: result.lineNumber
-          column: result.column
-          text: result.description
-          type: result.type
-
-      ed.getSession().setAnnotations annos
-
-      for result in results
-        rng = new Range.Range result.lineNumber, result.column-1,
-            result.lineNumber, result.column + result.length - 1
-        m_id = ed.getSession().addMarker rng, result.type, "background"
-        ed.__ace_markers__.push m_id
-
-    editor.clearResults = (ed) ->
-      if not ed? then return
-      ed.getSession().clearAnnotations()
-      markers = ed.__ko_ace_markers__ || []
-      _.each markers, (mid) -> ed.getSession().removeMarker mid
-      ed.__ace_markers__ = []
+    editor.addResult = module.exports.addResult
+    editor.clearResults = module.exports.clearResults
 
     editor.getSession().on "change", (delta)->
       options.plugins?.forEach (p) ->
