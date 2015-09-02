@@ -7,6 +7,7 @@ require 'brace/ext/language_tools'
 _ = require 'lodash'
 
 module.exports =
+  Range: Range,
   addResult: (ed, results) ->
     annos = ed.getSession().getAnnotations()
     for result in results
