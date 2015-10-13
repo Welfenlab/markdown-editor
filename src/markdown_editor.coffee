@@ -37,6 +37,7 @@ module.exports =
     options = options || {}
     editor = ace.edit(element_id);
 
+    editor.$blockScrolling = Infinity
     editor.setTheme 'ace/theme/chrome'
     editor.getSession().setMode 'ace/mode/markdown'
     ### this is tutor app logic .. move it there
