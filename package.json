@@ -1,11 +1,11 @@
 {
   "name": "@tutor/markdown-editor",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Markdown Editor based on Ace for Tutor",
   "main": "lib/markdown_editor.js",
   "scripts": {
     "test": "echo \"no test specified\"",
-    "prepublish" : "node node_modules/gulp/bin/gulp.js"
+    "prepublish": "node node_modules/gulp/bin/gulp.js"
   },
   "keywords": [
     "Markdown",
@@ -13,12 +13,12 @@
     "Tutor",
     "Ace"
   ],
-  "contributors" : [
+  "contributors": [
     "Maximilian Klein <dasmaxl@gmail.com> (https://github.com/LittleHelicase)",
     "Maik Marschner (https://github.com/leMaik)",
     "Tim Ebbeke (https://github.com/5cript)"
   ],
-  "repository" : "github:Welfenlab/markdown-editor",
+  "repository": "github:Welfenlab/markdown-editor",
   "license": "MIT",
   "devDependencies": {
     "browserify": "^11.0.1",
