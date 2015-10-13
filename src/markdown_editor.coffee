@@ -28,7 +28,7 @@ module.exports =
   clearResults: (ed) ->
     if not ed? then return
     ed.getSession().clearAnnotations()
-    markers = ed.__ko_ace_markers__ || []
+    markers = ed.__ace_markers__ || []
     _.each markers, (mid) -> ed.getSession().removeMarker mid
     ed.__ace_markers__ = []
 
