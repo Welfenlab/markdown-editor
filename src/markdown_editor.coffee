@@ -1,8 +1,7 @@
-Ace = require 'brace'
-Range = Ace.acequire 'ace/range'
-require 'brace/mode/markdown'
-require 'brace/theme/chrome'
-require 'brace/ext/language_tools'
+Range = (ace.require 'ace/range')
+ace.require 'ace/mode/markdown'
+ace.require 'ace/theme/chrome'
+ace.require 'ace/ext/language_tools'
 
 _ = require 'lodash'
 
