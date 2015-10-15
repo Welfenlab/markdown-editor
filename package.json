@@ -1,6 +1,6 @@
 {
   "name": "@tutor/markdown-editor",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Markdown Editor based on Ace for Tutor",
   "main": "lib/markdown_editor.js",
   "scripts": {
