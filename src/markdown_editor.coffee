@@ -53,7 +53,7 @@ module.exports =
       editor.setOptions
         maxLines: "Infinity"
 
-    editor.setValue(value);
+    editor.setValue(value, -1); #-1 so that the content won't be selected, see https://github.com/ajaxorg/ace/issues/1485
     editor.gotoLine(0);
 
     editor.setOptions {
